@@ -20,7 +20,7 @@ public class Augintinis {
     }
 
     public String gautiInfo() {
-        return "models.Augintinis: " + vardas + " | Rusis: " + rusis +
+        return "Augintinis: " + vardas + " | Rusis: " + rusis +
                 " | Amzius: " + amzius + " | Svoris: " + svoris;
     }
 
@@ -28,14 +28,18 @@ public class Augintinis {
     public String getVardas() {
         return vardas;
     }
+    public void setVardas(String vardas) { this.vardas = vardas; }
+
 
     public String getRusis() {
         return rusis;
     }
+    public void setRusis(String rusis) { this.rusis = rusis; }
 
     public int getAmzius() {
         return amzius;
     }
+    public void setAmzius(Integer amzius) { this.amzius = amzius; }
 
     public Klientas getKlientas() {
         return klientas;
@@ -50,8 +54,6 @@ public class Augintinis {
     public double getSvoris() {
         return svoris;
     }
+    public void setSvoris(Double svoris) { this.svoris = svoris; }
 
-    public void setSvoris(double svoris) {
-        this.svoris = svoris;
-    }
 }
