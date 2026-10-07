@@ -8,9 +8,8 @@ public class Vartotojas {
         this.vardas = vardas;
         this.telefonas = telefonas;
     }
-//    public Vartotojas() { }
-
     public Vartotojas(String vardas) {
+        this.vardas = vardas;
     }
 
     public String getVardas() {return vardas;}

@@ -1,9 +1,6 @@
 package main;
 
-import models.Augintinis;
-import models.Klientas;
-import models.Registracija;
-import models.Veterinaras;
+import models.*;
 
 public class Main {
     public static void main(String[] args) {
