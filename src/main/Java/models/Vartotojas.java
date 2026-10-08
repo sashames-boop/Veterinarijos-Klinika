@@ -14,6 +14,7 @@ public class Vartotojas {
 
     public String getVardas() {return vardas;}
     public void setVardas(String vardas) {this.vardas = vardas;}
+
     public String getTel() {return telefonas;}
     public void setTel(String telefonas) {this.telefonas = telefonas;}
 }

@@ -5,18 +5,20 @@ import java.util.List;
 
 
 public class Klientas extends Vartotojas{
+    private String elPastas;
     private List <Augintinis> augintiniai;
     private List <Registracija> registracijos;
 
 
-    public Klientas(String vardas, String telefonas) {
+    public Klientas(String vardas, String telefonas, String elPastas) {
         super(vardas, telefonas);
+        this.elPastas = elPastas;
         this.augintiniai = new ArrayList<>();
         this.registracijos = new ArrayList<>();
     }
 
     public void uzregistruotiAugintini(Augintinis augintinis) {
-        this.augintiniai.add(augintinis);
+        if(!augintiniai.contains(augintinis)) augintiniai.add(augintinis);
         augintinis.setKlientas(this);
         System.out.println("Augintinis " + augintinis.getVardas() + " sekmingai gautas!");
     }
@@ -33,7 +35,16 @@ public class Klientas extends Vartotojas{
         return registracija;
     }
 
+    public String getElPastas() { return elPastas; }
+    public void setElPastas(String elPastas) { this.elPastas = elPastas; }
+
     public List<Augintinis> getAugintiniai() {
         return augintiniai;
     }
+
+    public List<Registracija> getRegistracijos() { return registracijos; }
+
+    @Override
+    public String toString() { return vardas + " (" + telefonas + ")"; }
+
 }

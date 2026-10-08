@@ -22,8 +22,12 @@ public class Veterinaras extends Vartotojas{
     public String getSpecializacija() {
         return specializacija;
     }
+    public void setSpecializacija(String specializacija) { this.specializacija = specializacija; }
 
     public List<Registracija> getRegistracijos() {
         return registracijos;
     }
+
+    @Override
+    public String toString() { return vardas + "(" + specializacija + ")"; }
 }

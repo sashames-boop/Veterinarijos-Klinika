@@ -3,8 +3,8 @@ package models;
 public class Registracija {
     private String data;
     private String laikas;
-    private Augintinis augintinis; // RyŲ�Ųys "1"
-    private Veterinaras veterinaras; // RyŲ�Ųys "1"
+    private Augintinis augintinis;
+    private Veterinaras veterinaras;
     private boolean patvirtinta;
 
     public Registracija(String data, String laikas, Augintinis augintinis, Veterinaras veterinaras) {
@@ -12,7 +12,7 @@ public class Registracija {
         this.laikas = laikas;
         this.augintinis = augintinis;
         this.veterinaras = veterinaras;
-        this.patvirtinta = false; // IŲ�Ų prad registracija nepatvirtinta
+        this.patvirtinta = false;
 
         // Pridedame augintinio registracija prie augintinio ir veterinaro istorijas
         augintinis.getRegistracijos().add(this);
@@ -46,7 +46,11 @@ public class Registracija {
         return veterinaras;
     }
 
-    public boolean isPatvirtinta() {
+    public boolean yraPatvirtinta() {
         return patvirtinta;
     }
+
+    @Override
+    public String toString() { return data + " " + laikas + " | " + veterinaras.getVardas()
+        + "(" + veterinaras.getSpecializacija() + ") | " + (patvirtinta ? "patvirtinta" : "nepatvirtinta"); }
 }

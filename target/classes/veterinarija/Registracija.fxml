@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0"
-            prefWidth="600.0">
 
-    <Button text="Test mygtukas"
-            layoutX="240"
-            layoutY="180"/>
-
-</AnchorPane>
+<VBox alignment="CENTER" spacing="16.0" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+    <children>
+        <Button fx:id="btnKlientoReg" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#atidarytiKlientoReg" text="Kliento registracija" />
+        <Button fx:id="btnVeterinaroReg" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#atidarytiVeterinaroReg" text="Veterinaro registracija" />
+        <Button fx:id="btnAugintinioReg" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#atidarytiAugintinioReg" text="Augintinio registracija" />
+        <Button fx:id="btnPriskyrimas" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#atidarytiPriskyrima" text="Augintinio priskyrimas" />
+        <Button fx:id="btnInformacija" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#atidarytiInformacija" text="Augintinio informacija" />
+    </children>
+</VBox>

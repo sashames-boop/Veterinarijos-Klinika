@@ -1,8 +1,27 @@
 package main;
 
-import models.*;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Main {
+public class MainApp extends Application {
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/veterinarija/registracija.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 300);
+        stage.setTitle("Veterinarijos Klinika");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
+
+/*
+public class MainApp {
     public static void main(String[] args) {
         System.out.println("=== VETERINARIJOS KLINIKOS SISTEMA ===\n");
 
@@ -42,3 +61,4 @@ public class Main {
         gydytojas2.priimtiPacienta(vizitas);
     }
 }
+ */

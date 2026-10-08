@@ -30,7 +30,6 @@ public class Augintinis {
     }
     public void setVardas(String vardas) { this.vardas = vardas; }
 
-
     public String getRusis() {
         return rusis;
     }
@@ -44,16 +43,17 @@ public class Augintinis {
     public Klientas getKlientas() {
         return klientas;
     }
-
     public void setKlientas(Klientas klientas) {
         this.klientas = klientas;
     }
-
-    public List<Registracija> getRegistracijos() {return registracijos;}
 
     public double getSvoris() {
         return svoris;
     }
     public void setSvoris(Double svoris) { this.svoris = svoris; }
 
+    public List<Registracija> getRegistracijos() {return registracijos;}
+
+    @Override
+    public String toString() { return vardas + " [" + rusis + "]"; }
 }
