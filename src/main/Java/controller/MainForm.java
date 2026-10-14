@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 
 import models.*;
 
-public class MainController {
+public class MainForm {
 
     // KLIENTO REGISTRACIJA
     @FXML

@@ -18,6 +18,10 @@ public class Veterinaras extends Vartotojas{
                 + registracija.getAugintinis().getVardas());
     }
 
+    public void patvirtinti() {
+        registracijos.get(registracijos.size() - 1).patvirtinti();
+    }
+
     // Getteriai ir Setteriai
     public String getSpecializacija() {
         return specializacija;

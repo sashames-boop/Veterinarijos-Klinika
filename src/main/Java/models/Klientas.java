@@ -11,7 +11,14 @@ public class Klientas extends Vartotojas{
 
 
     public Klientas(String vardas, String telefonas, String elPastas) {
-        super(vardas, telefonas);
+        super(vardas, telefonas, "");
+        this.elPastas = elPastas;
+        this.augintiniai = new ArrayList<>();
+        this.registracijos = new ArrayList<>();
+    }
+
+    public Klientas(String vardas, String telefonas, String elPastas, String slaptazodis) {
+        super(vardas, telefonas, slaptazodis);
         this.elPastas = elPastas;
         this.augintiniai = new ArrayList<>();
         this.registracijos = new ArrayList<>();

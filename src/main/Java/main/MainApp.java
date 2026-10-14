@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/veterinarija/registracija.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/veterinarija/login-form.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 300);
         stage.setTitle("Veterinarijos Klinika");
         stage.setScene(scene);

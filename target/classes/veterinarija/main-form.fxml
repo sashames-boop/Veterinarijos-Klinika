@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox alignment="CENTER" spacing="16.0" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<VBox alignment="CENTER" spacing="16.0" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainForm">
     <children>
         <Button fx:id="btnKlientoReg" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#atidarytiKlientoReg" text="Kliento registracija" />
         <Button fx:id="btnVeterinaroReg" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#atidarytiVeterinaroReg" text="Veterinaro registracija" />

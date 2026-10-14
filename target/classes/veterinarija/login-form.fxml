@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginForm">
+   <children>
+      <TextField fx:id="usrnameField" layoutX="80.0" layoutY="53.0" prefHeight="26.0" prefWidth="159.0" />
+      <Button layoutX="96.0" layoutY="141.0" mnemonicParsing="false" onAction="#patikrintiLogin" prefHeight="26.0" prefWidth="128.0" text="Login" />
+      <Button layoutX="125.0" layoutY="200.0" mnemonicParsing="false" onAction="#atidarytiReg" prefHeight="9.0" prefWidth="70.0" text="Register" />
+      <Text layoutX="80.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="85.33673095703125" />
+      <Text layoutX="80.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="85.33673095703125" />
+      <PasswordField fx:id="pswField" layoutX="79.0" layoutY="108.0" prefHeight="26.0" prefWidth="159.0" />
+   </children>
+</AnchorPane>
