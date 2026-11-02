@@ -13,47 +13,68 @@ import java.io.IOException;
 
 public class LoginForm {
     @FXML
-    private TextField usrnameField;
-    @FXML
-    private PasswordField pswField;
+    private TextField usernameField;
 
     @FXML
-    public void patikrintiLogin() throws IOException {
-        String username = usrnameField.getText();
-        String password = pswField.getText();
+    private PasswordField passwordField;
 
-        LoginStatus status = DuomBaze.patikrintiLogin(username, password);
+    @FXML
+    public void validateLogin() throws IOException {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
         if (username.isEmpty() || password.isEmpty()) {
-            rodytiKlaidosPranesima("Klaida", "Įveskite prisijungimo duomenis.");
+            showError("Error", "Enter your login credentials.");
+            return;
         }
+
+        LoginStatus status = DuomBaze.validateLogin(username, password);
+
         if (status == LoginStatus.SUCCESS) {
-            rodytiPranesima("Sekmė", "Sekmingai prisijungta prie sistemos!");
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/resources/veterinarija/main-form.fxml")));
-        }
-        else if (status == LoginStatus.WRONG_PSW){
-            rodytiKlaidosPranesima("Klaida", "Neteisingas slaptažodis.");
-        }
-        else if (status == LoginStatus.USER_NOT_FOUND){
-            rodytiKlaidosPranesima("Klaida", "Nėra tokio vartotojo. Kviečiame Jus užsiregistruoti!");
+//            showMessage("Success", "Logged in successfully!");
+
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            Scene scene = new Scene(
+                    FXMLLoader.load(getClass().getResource("/veterinarija/main-form.fxml"))
+            );
+            stage.setScene(scene);
+            stage.show();
+        } else if (status == LoginStatus.WRONG_PASSWORD) {
+            showError("Error", "Incorrect password.");
+        } else if (status == LoginStatus.USER_NOT_FOUND) {
+            showError("Error", "User not found. Please register.");
+            openRegistration();
         }
     }
-    public void atidarytiReg() throws IOException {
+    @FXML
+    public void openRegistration() throws IOException {
 
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/veterinarija/reg-form.fxml")
+        );
+
+        Scene scene = new Scene(loader.load());
+
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+
+        stage.setTitle("Registration");
+        stage.setScene(scene);
+        stage.show();
     }
 
-    private void rodytiKlaidosPranesima(String antraste, String tekstas) {
+    private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(antraste);
+        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(tekstas);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 
-    private void rodytiPranesima(String antraste, String tekstas) {
+    private void showMessage(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(antraste);
+        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(tekstas);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }

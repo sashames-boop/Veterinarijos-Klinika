@@ -4,35 +4,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DuomBaze {
-    private static final List<Klientas> klientai = new ArrayList<>();
-    private static final List<Augintinis> augintiniai = new ArrayList<>();
-    private static final List<Veterinaras> veterinarai = new ArrayList<>();
+    private static final List<Client> clients = new ArrayList<>();
+    private static final List<Pet> pets = new ArrayList<>();
+    private static final List<Vet> vets = new ArrayList<>();
+    private static final List<User> users = new ArrayList<>();
 
 
-    public static LoginStatus patikrintiLogin(String vardas, String slaptazodis) {
-        for(Klientas k: klientai) {
-            if(k.getVardas().equals(vardas)) {
-                if(k.getSlaptazodis().equals(slaptazodis)) {
+    public static LoginStatus validateLogin(String username, String password) {
+        for(User u: users) {
+            if(username.equals(u.getUsername())) {
+                if(password.equals(u.getPassword())) {
                     return LoginStatus.SUCCESS;
                 }
-                if(!k.getSlaptazodis().equals(slaptazodis)) {
-                    return LoginStatus.WRONG_PSW;
-                }
-            }
-            if(!k.getVardas().equals(vardas)) {
-                return LoginStatus.USER_NOT_FOUND;
+                return LoginStatus.WRONG_PASSWORD;
             }
         }
         return LoginStatus.USER_NOT_FOUND;
     }
 
-    public static List<Klientas> getKlientai() {
-        return klientai;
+    public static User getUserByCredentials(String username, String password) {
+
+        for (User user : users) {
+
+            if (username.equals(user.getUsername())
+                    && password.equals(user.getPassword())) {
+
+                return user;
+            }
+        }
+
+        return null;
     }
 
-    public static List<Augintinis> getAugintiniai() {
-        return augintiniai;
+    public static List<Client> getClients() {
+        return clients;
     }
 
-    public static List<Veterinaras> getVeterinarai() { return veterinarai; }
+    public static List<Pet> getPets() {
+        return pets;
+    }
+
+    public static List<Vet> getVets() {
+        return vets;
+    }
+
+    public static List<User> getUsers() { return users; }
 }

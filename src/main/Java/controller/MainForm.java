@@ -16,206 +16,227 @@ public class MainForm {
 
     // KLIENTO REGISTRACIJA
     @FXML
-    public void atidarytiKlientoReg(ActionEvent event) {
-        Dialog<Klientas> dialog = new Dialog<>();
-        dialog.setTitle("Kliento Registracija");
-        dialog.setHeaderText("Įveskite kliento duomenis:");
+    public void openClientRegistration(ActionEvent event) {
+        Dialog<Client> dialog = new Dialog<>();
+        dialog.setTitle("Client Registration");
+        dialog.setHeaderText("Enter client details:");
 
-        ButtonType registruotiButtonType = new ButtonType("Registruoti", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(registruotiButtonType, ButtonType.CANCEL);
+        ButtonType registerButtonType = new ButtonType("Register", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(registerButtonType, ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
 
-        TextField vardasField = new TextField();
-        vardasField.setPromptText("Vardas Pavardė");
-        TextField telefonasField = new TextField();
-        telefonasField.setPromptText("+370...");
-        TextField elPastasField = new TextField();
-        elPastasField.setPromptText("jusu.vardas@example.com");
+        TextField nameField = new TextField();
+        nameField.setPromptText("First name Last name");
+        TextField phoneField = new TextField();
+        phoneField.setPromptText("+370...");
+        TextField emailField = new TextField();
+        emailField.setPromptText("your.name@example.com");
 
-        grid.add(new Label("Vardas:"), 0, 0);
-        grid.add(vardasField, 1, 0);
-        grid.add(new Label("Telefonas:"), 0, 1);
-        grid.add(telefonasField, 1, 1);
-        grid.add(new Label("El. paštas:"), 0, 2);
-        grid.add(elPastasField, 1, 2);
+        grid.add(new Label("Name:"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Phone:"), 0, 1);
+        grid.add(phoneField, 1, 1);
+        grid.add(new Label("Email:"), 0, 2);
+        grid.add(emailField, 1, 2);
 
         dialog.getDialogPane().setContent(grid);
 
-        duomenuPatikrinimas(dialog, registruotiButtonType, () -> {
-            String vardas = vardasField.getText();
-            String pastas = elPastasField.getText();
-            String tel = telefonasField.getText();
+        dataValidation(dialog, registerButtonType, () -> {
+            String name = nameField.getText();
+            String email = emailField.getText();
+            String phone = phoneField.getText();
 
-            if (vardas.isEmpty()) {
-                throw new IllegalArgumentException("Vardas negali būti tuščias.");
+            if (name.isEmpty()) {
+                throw new IllegalArgumentException("Name cannot be empty.");
             }
-            if (tel.length() < 12)
-                throw new IllegalArgumentException("Telefono numeris negali būti trumpesnis už 12 simbolių.");
-            if (tel.length() > 12)
-                throw new IllegalArgumentException("Telefono numeris negali būti ilgesnis nei 12 simbolių.");
-            if (!tel.startsWith("+"))
-                throw new IllegalArgumentException("Telefono numeris privalo prasidėti iš '+' simbolio.");
-            for (int i = 1; i < tel.length(); i++) {
-                char simb = tel.charAt(i);
-                if (simb < '0' || simb > '9')
-                    throw new IllegalArgumentException("Telefono numeris privalo būti sudarytas iš skaičių.");
+            if (phone.length() < 12) {
+                throw new IllegalArgumentException("Phone number cannot be shorter than 12 characters.");
             }
-            if (!pastas.contains("@")) throw new IllegalArgumentException("Paštas turi būti užrašytas su @ simboliu.");
-            return new Klientas(vardas, tel, pastas);
+            if (phone.length() > 12) {
+                throw new IllegalArgumentException("Phone number cannot be longer than 12 characters.");
+            }
+            if (!phone.startsWith("+")) {
+                throw new IllegalArgumentException("Phone number must start with '+'.");
+            }
+            for (int i = 1; i < phone.length(); i++) {
+                char character = phone.charAt(i);
+                if (character < '0' || character > '9') {
+                    throw new IllegalArgumentException("Phone number must contain only digits after '+'.");
+                }
+            }
+            if (!email.contains("@")) {
+                throw new IllegalArgumentException("Email address must contain '@'.");
+            }
+            return new Client(name, phone, email);
         });
 
-        Optional<Klientas> result = dialog.showAndWait();
-        result.ifPresent(klientas -> {
-            DuomBaze.getKlientai().add(klientas);
-            rodytiPranesima("Sėkmė", "Klientas " + klientas.getVardas() + " sėkmingai užregistruotas!");
+        Optional<Client> result = dialog.showAndWait();
+        result.ifPresent(client -> {
+            DuomBaze.getClients().add(client);
+            showMessage("Success", "Client " + client.getName() + " registered successfully!");
         });
     }
 
     // VETERINARO REGISTRACIJA
-    public void atidarytiVeterinaroReg(ActionEvent event) {
-        Dialog<Veterinaras> dialog = new Dialog<>();
-        dialog.setTitle("Veterinaro Registracija");
-        dialog.setHeaderText("Įveskite veterinaro duomenis:");
+    @FXML
+    public void openVetRegistration(ActionEvent event) {
+        Dialog<Vet> dialog = new Dialog<>();
+        dialog.setTitle("Vet Registration");
+        dialog.setHeaderText("Enter vet details:");
 
-        ButtonType registruotiButtonType = new ButtonType("Registruoti", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(registruotiButtonType, ButtonType.CANCEL);
+        ButtonType registerButtonType = new ButtonType("Register", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(registerButtonType, ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
 
-        TextField vardasField = new TextField();
-        vardasField.setPromptText("Vardas Pavardė");
-        TextField specField = new TextField();
-        specField.setPromptText("Pvz. chirurgas");
+        TextField nameField = new TextField();
+        nameField.setPromptText("First name Last name");
+        TextField specializationField = new TextField();
+        specializationField.setPromptText("e.g. surgeon");
 
-        grid.add(new Label("Vardas:"), 0, 0);
-        grid.add(vardasField, 1, 0);
-        grid.add(new Label("Specialybė:"), 0, 1);
-        grid.add(specField, 1, 1);
+        grid.add(new Label("Name:"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Specialization:"), 0, 1);
+        grid.add(specializationField, 1, 1);
         dialog.getDialogPane().setContent(grid);
 
-        duomenuPatikrinimas(dialog, registruotiButtonType, () -> {
-            String vardas = vardasField.getText();
-            String specializacija = specField.getText();
+        dataValidation(dialog, registerButtonType, () -> {
+            String name = nameField.getText();
+            String specialization = specializationField.getText();
 
-            if (vardas.isEmpty() || specializacija.isEmpty()) {
-                throw new IllegalArgumentException("Vardas ir/ar specializacija turi būti užpildyti.");
+            if (name.isEmpty() || specialization.isEmpty()) {
+                throw new IllegalArgumentException("Name and specialization must be filled in.");
             }
-            return new Veterinaras(vardas, specializacija);
+            return new Vet(name, specialization);
         });
 
-        Optional<Veterinaras> result = dialog.showAndWait();
-        result.ifPresent(veterinaras -> {
-            DuomBaze.getVeterinarai().add(veterinaras);
-            rodytiPranesima("Sekmė", "Veterinaras " +
-                    veterinaras.getVardas() + " sėkmingai užregistruotas!");
+        Optional<Vet> result = dialog.showAndWait();
+        result.ifPresent(vet -> {
+            DuomBaze.getVets().add(vet);
+            showMessage("Success", "Vet " + vet.getName() + " registered successfully!");
         });
     }
 
     // AUGINTINIO REGISTRACIJA
     @FXML
-    public void atidarytiAugintinioReg(ActionEvent event) {
-        Dialog<Augintinis> dialog = new Dialog<>();
-        dialog.setTitle("Augintinio Registracija");
+    public void openPetRegistration(ActionEvent event) {
+        Dialog<Pet> dialog = new Dialog<>();
+        dialog.setTitle("Pet Registration");
 
-        ButtonType registruotiButtonType = new ButtonType("Išsaugoti", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(registruotiButtonType, ButtonType.CANCEL);
+        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
 
-        TextField vardasField = new TextField();
-        TextField rusisField = new TextField();
-        TextField amziusField = new TextField();
-        TextField svorisField = new TextField();
+        TextField nameField = new TextField();
+        ComboBox <PetType> typeField = new ComboBox<>();
+        typeField.getItems().setAll(PetType.values());
+        typeField.setPromptText("Pet type");
+        TextField ageField = new TextField();
+        TextField weightField = new TextField();
 
-        grid.add(new Label("Vardas:"), 0, 0);
-        grid.add(vardasField, 1, 0);
-        grid.add(new Label("Rūšis:"), 0, 1);
-        grid.add(rusisField, 1, 1);
-        grid.add(new Label("Amžius(metai):"), 0, 2);
-        grid.add(amziusField, 1, 2);
-        grid.add(new Label("Svoris(kg):"), 0, 3);
-        grid.add(svorisField, 1, 3);
+        grid.add(new Label("Name:"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Species:"), 0, 1);
+        grid.add(typeField, 1, 1);
+        grid.add(new Label("Age (years):"), 0, 2);
+        grid.add(ageField, 1, 2);
+        grid.add(new Label("Weight (kg):"), 0, 3);
+        grid.add(weightField, 1, 3);
         dialog.getDialogPane().setContent(grid);
 
-        duomenuPatikrinimas(dialog, registruotiButtonType, () -> {
+        dataValidation(dialog, saveButtonType, () -> {
             try {
-                if (vardasField.getText().isEmpty() || rusisField.getText().isEmpty() || amziusField.getText().isEmpty() || svorisField.getText().isEmpty()) {
-                    throw new IllegalArgumentException("Visi laukai turi būti užpildyti!");
+                if (nameField.getText().isEmpty()
+                        || ageField.getText().isEmpty()
+                        || weightField.getText().isEmpty()) {
+                    throw new IllegalArgumentException("All fields must be filled in!");
                 }
-                int amzius = Integer.parseInt(amziusField.getText());
-                double svoris = Double.parseDouble(svorisField.getText());
-                return new Augintinis(vardasField.getText(), rusisField.getText(), amzius, svoris);
+
+                int age = Integer.parseInt(ageField.getText());
+                double weight = Double.parseDouble(weightField.getText());
+                return new Pet(nameField.getText(), typeField.getValue(), age, weight);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Amžius bei svoris turi būti skaičius!", e);
+                throw new IllegalArgumentException("Age and weight must be numbers!", e);
             }
         });
 
-        Optional<Augintinis> result = dialog.showAndWait();
-        result.ifPresent(augintinis -> {
-            DuomBaze.getAugintiniai().add(augintinis);
-            rodytiPranesima("Sėkmė", "Augintinis " + augintinis.getVardas() + " pridėtas!");
+        Optional<Pet> result = dialog.showAndWait();
+        result.ifPresent(pet -> {
+            DuomBaze.getPets().add(pet);
+            showMessage("Success", "Pet " + pet.getName() + " added successfully!");
         });
     }
 
     // AUGINTINIO PRISKYRIMAS KLIENTUI
     @FXML
     public void atidarytiPriskyrima(ActionEvent event) {
-        if (DuomBaze.getKlientai().isEmpty() || DuomBaze.getAugintiniai().isEmpty()) {
-            rodytiKlaidosPranesima("Klaida", "Pirmiausia turite įvesti bent vieną klientą ir augintinį!");
+        if (DuomBaze.getClients().isEmpty() || DuomBaze.getPets().isEmpty()) {
+            showError("Error",
+                    "First add at least one client and one pet!");
             return;
         }
 
         Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Priskirti augintinį");
+        dialog.setTitle("Assign Pet");
 
-        ChoiceBox<Klientas> klientoBox = new ChoiceBox<>();
-        klientoBox.getItems().addAll(DuomBaze.getKlientai());
+        ChoiceBox<Client> clientChoiceBox = new ChoiceBox<>();
+        clientChoiceBox.getItems().addAll(DuomBaze.getClients());
 
-        ChoiceBox<Augintinis> augintinioBox = new ChoiceBox<>();
-        augintinioBox.getItems().addAll(DuomBaze.getAugintiniai());
+        ChoiceBox<Pet> petChoiceBox = new ChoiceBox<>();
+        petChoiceBox.getItems().addAll(DuomBaze.getPets());
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.add(new Label("Pasirinkite Klientą:"), 0, 0);
-        grid.add(klientoBox, 1, 0);
-        grid.add(new Label("Pasirinkite Augintinį:"), 0, 1);
-        grid.add(augintinioBox, 1, 1);
+        grid.add(new Label("Select client:"), 0, 0);
+        grid.add(clientChoiceBox, 1, 0);
+        grid.add(new Label("Select pet:"), 0, 1);
+        grid.add(petChoiceBox, 1, 1);
+
 
         dialog.getDialogPane().setContent(grid);
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
-        duomenuPatikrinimas(dialog, ButtonType.OK, () -> {
-            Klientas k = klientoBox.getValue();
-            Augintinis a = augintinioBox.getValue();
-            if (k == null || a == null) {
-                throw new IllegalArgumentException("Pasirinkite klientą ir augintinį.");
+        dataValidation(dialog, ButtonType.OK, () -> {
+            Client client = clientChoiceBox.getValue();
+            Pet pet = petChoiceBox.getValue();
+
+            if (client == null || pet == null) {
+                throw new IllegalArgumentException("Select both a client and a pet.");
             }
 
-            if (a.getKlientas() != null) {
-                throw new IllegalArgumentException("Šis augintinis jau turi jam priskirtą šeimininką: " +
-                        a.getKlientas().getVardas() + " (" + a.getKlientas().getTel() + ").");
+            if (pet.getOwner() != null) {
+                throw new IllegalArgumentException(
+                        "This pet already has an assigned owner: "
+                                + pet.getOwner().getName() + " ("
+                                + pet.getOwner().getPhone() + ")."
+                );
             }
-            k.uzregistruotiAugintini(a);
-            rodytiPranesima("Sėkmė", "Augintinis " + a.getVardas() + " priskirtas prie " +
-                    a.getKlientas().getVardas() + " šeimininko!");
+
+            client.registerPet(pet);
+            showMessage(
+                    "Success",
+                    "Pet " + pet.getName() + " assigned to owner " + pet.getOwner().getName() + "!"
+            );
             return null;
         });
+
         dialog.showAndWait();
     }
 
     // INFORMACIJOS RODYMAS
     @FXML
-    public void atidarytiInformacija(ActionEvent event) {
-        if (DuomBaze.getAugintiniai().isEmpty()) {
-            rodytiKlaidosPranesima("Klaida", "Nieko nerasta augintinių sąraše :(");
+    public void openInformation(ActionEvent event) {
+        if (DuomBaze.getPets().isEmpty()) {
+            showError("Error", "No pets found.");
             return;
         }
 //        Dialog<Void> dialog = new Dialog<>();
@@ -239,54 +260,63 @@ public class MainForm {
 //        duomenuPatikrinimas(dialog, );
 
         StringBuilder sb = new StringBuilder();
-        for (Klientas k : DuomBaze.getKlientai()) {
-            sb.append("Klientas: ").append(k.getVardas()).append(" (Tel: ").append(k.getTel()).
-                    append("El. paštas: ").append(k.getElPastas()).append(")\n");
-            sb.append("Augintiniai:\n");
-            for (Augintinis a : k.getAugintiniai()) {
-                sb.append("  - ").append(a.gautiInfo()).append("\n");
+
+        for (Client client : DuomBaze.getClients()) {
+            sb.append("Client: ")
+                    .append(client.getName())
+                    .append(" (Phone: ")
+                    .append(client.getPhone())
+                    .append(", Email: ")
+                    .append(client.getEmail())
+                    .append(")\n");
+
+            sb.append("Pets:\n");
+            for (Pet pet : client.getPets()) {
+                sb.append("  - ").append(pet.getInfo()).append("\n");
             }
             sb.append("------------------------------\n");
         }
 
         if (sb.length() == 0) {
-            sb.append("Nėra jokių užregistruotų duomenų.");
+            sb.append("No registered data found.");
         }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Augintinių Informacija");
-        alert.setHeaderText("Klientų ir augintinių sąrašas");
+        alert.setTitle("Pet Information");
+        alert.setHeaderText("Client and pet list");
         alert.setContentText(sb.toString());
         alert.showAndWait();
     }
 
-    private <T> void duomenuPatikrinimas(Dialog<T> dialog, ButtonType submitButton, Supplier<T> tikrinti) {
-        ObjectProperty<T> gerasRezultatas = new SimpleObjectProperty<>();
+    private <T> void dataValidation(Dialog<T> dialog, ButtonType submitButton,
+            Supplier<T> validator) {
+        ObjectProperty<T> validResult = new SimpleObjectProperty<>();
         dialog.getDialogPane().lookupButton(submitButton).addEventFilter(ActionEvent.ACTION, event -> {
             try {
-                gerasRezultatas.set(tikrinti.get());
+                validResult.set(validator.get());
             } catch (IllegalArgumentException e) {
-                event.consume(); // Sustabdyti dialoga, kad info liktu langelyje
-                rodytiKlaidosPranesima("Klaida", e.getMessage());
+                // Keep the dialog open so the user can correct the entered data.
+                event.consume();
+                showError("Error", e.getMessage());
             }
         });
-        dialog.setResultConverter(button -> button == submitButton ? gerasRezultatas.get() : null);
+        dialog.setResultConverter(button -> button == submitButton ? validResult.get() : null);
         // jeigu submitButton - true(clicked), tada gerasusRezultatas.get() grazins rezultata, kitaip grazins null
     }
 
-    private void rodytiPranesima(String antraste, String tekstas) {
+    private void showMessage(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(antraste);
+        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(tekstas);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 
-    private void rodytiKlaidosPranesima(String antraste, String tekstas) {
+    private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(antraste);
+        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(tekstas);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }

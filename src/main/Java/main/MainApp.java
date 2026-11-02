@@ -1,18 +1,50 @@
 package main;
 
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import models.Client;
+import models.DuomBaze;
 
 public class MainApp extends Application {
+
+    public static EntityManagerFactory entityManagerFactory;
+
     @Override
     public void start(Stage stage) throws Exception {
+
+        entityManagerFactory = Persistence.createEntityManagerFactory("Veterinarija");
+
+        Client testClient = new Client("Jonas Jonaitis",
+                "+37060000000",
+                "jonas@email.com",
+                "jonas123",
+                "12345"
+        );
+
+        DuomBaze.getClients().add(testClient);
+        DuomBaze.getUsers().add(testClient);
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/veterinarija/login-form.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 300);
-        stage.setTitle("Veterinarijos Klinika");
+        stage.setTitle("Veterinary Clinic");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() {
+
+        if (entityManagerFactory != null
+                && entityManagerFactory.isOpen()) {
+
+            entityManagerFactory.close();
+        }
     }
 
     public static void main(String[] args) {

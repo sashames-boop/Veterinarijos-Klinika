@@ -1,5 +1,5 @@
 package models;
 
 public enum LoginStatus {
-    SUCCESS, WRONG_PSW, USER_NOT_FOUND;
+    SUCCESS, WRONG_PASSWORD, USER_NOT_FOUND;
 }
