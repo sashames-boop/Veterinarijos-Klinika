@@ -5,14 +5,21 @@
              version="3.0">
   <persistence-unit name="Veterinarija">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>models.User</class>
+    <class>models.Client</class>
+    <class>models.Registration</class>
+    <class>models.Vet</class>
+    <class>models.Pet</class>
+    <class>models.Groomer</class>
+    <class>models.Incident</class>
+    <class>models.Admin</class>
     <properties>
       <property name="jakarta.persistence.jdbc.driver"
                 value="com.mysql.cj.jdbc.Driver"/>
       <property name="jakarta.persistence.jdbc.url"
                 value="jdbc:mysql://localhost:3306/veterinarija?createDatabaseIfNotExist=true"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>
-      <property name="jakarta.persistence.jdbc.password" value=""/>
-
+      <property name="jakarta.persistence.jdbc.password" value="progtech242"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>

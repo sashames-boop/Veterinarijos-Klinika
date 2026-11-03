@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import models.*;
 
 import java.io.IOException;
+import main.MainApp;
+import jakarta.persistence.PersistenceException;
 
 public class LoginForm {
     @FXML
@@ -20,30 +22,50 @@ public class LoginForm {
 
     @FXML
     public void validateLogin() throws IOException {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
+        LoginStatus status;
+        User user = null;
 
         if (username.isEmpty() || password.isEmpty()) {
             showError("Error", "Enter your login credentials.");
             return;
         }
 
-        LoginStatus status = DuomBaze.validateLogin(username, password);
+        try {
+            status = MainApp.custom.validateLogin(username, password);
+            if (status == LoginStatus.SUCCESS) {
+                user = MainApp.custom.getUserByUsername(username);
+            } else if (status == LoginStatus.BLOCKED) {
+                showError("Access denied", "This account is blocked.");
+            }
+        } catch (PersistenceException ex) {
+            ex.printStackTrace();
+            showError("Error", "Invalid username or password. Please try again");
+            return;
+        }
 
         if (status == LoginStatus.SUCCESS) {
 //            showMessage("Success", "Logged in successfully!");
 
+            if(!(user instanceof Admin admin)) {
+                showError("Error", "Access denied.");
+                return;
+            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/veterinarija/main-form.fxml"));
+            Scene scene =  new Scene(loader.load());
+
+            MainForm mainForm = (MainForm) loader.getController();
+            mainForm.setAdmin(admin);
+
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            Scene scene = new Scene(
-                    FXMLLoader.load(getClass().getResource("/veterinarija/main-form.fxml"))
-            );
             stage.setScene(scene);
+            stage.setTitle(" Veterinary Clinic (Admin) ");
             stage.show();
         } else if (status == LoginStatus.WRONG_PASSWORD) {
             showError("Error", "Incorrect password.");
         } else if (status == LoginStatus.USER_NOT_FOUND) {
-            showError("Error", "User not found. Please register.");
-            openRegistration();
+            showError("Error", "User not found. Please check your username and password.");
         }
     }
     @FXML

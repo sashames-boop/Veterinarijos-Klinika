@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox alignment="CENTER" spacing="16.0" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainForm">
+    <children>
+        <Button fx:id="btnKlientoReg" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#openClientRegistration" text="Client registraion" />
+        <Button fx:id="btnVeterinaroReg" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#openVetRegistration" text="Vet registraion" />
+        <Button fx:id="btnAugintinioReg" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#openPetRegistration" text="Pet registraion" />
+        <Button fx:id="btnPriskyrimas" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#openAssigning" text="Pet assigning" />
+        <Button fx:id="btnInformacija" minWidth="220.0" prefWidth="220.0" maxWidth="220.0" mnemonicParsing="false" onAction="#openInformation" text="Pet information" />
+    </children>
+</VBox>

@@ -1,16 +1,27 @@
 package models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Groomer extends User {
     protected String specialization;
-    protected final List<Registration> registrations;
+    @OneToMany(mappedBy = "groomer")
+    private List<Registration> registrations =  new ArrayList<>();
 
+
+    public Groomer() {}
     public Groomer(String name, String phone, String password, String specialization) {
         super(name, phone, password);
         this.specialization = specialization;
-        this.registrations = new ArrayList<>();
+    }
+
+    public Groomer(String name, String phone, String username, String password, String specialization) {
+        super(name, phone, username, password);
+        this.specialization = specialization;
     }
 
     public void acceptPatient(Registration registration) {
@@ -18,10 +29,20 @@ public class Groomer extends User {
                 + registration.getPet().getName());
     }
 
-    public void confirmLatestRegistration() {
+    public void confirmRegistration() {
+        if(registrations.isEmpty()) {
+            System.out.println("Groomer " + name + " (" + specialization + ") has no appointments");
+            return;
+        }
         registrations.get(registrations.size() - 1).confirm();
     }
 
+
+    public List<Registration> getRegistrations() {
+        return registrations;
+    }
+
+    //Geteriai ir Setteriai
     public String getSpecialization() {
         return specialization;
     }
