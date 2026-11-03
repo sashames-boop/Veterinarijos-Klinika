@@ -116,8 +116,8 @@
                     <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
                         <children>
                             <Button text="Add" onAction="#openIncidentAdd"/>
-                            <Button disable ="true" text="Edit"/>
-                            <Button disable="true" text="Delete"/>
+                            <Button disable ="true" text="Edit" onAction="#openIncidentEdit"/>
+                            <Button disable="true" text="Delete" onAction="#openIncidentDelete"/>
                         </children>
                         <effect>
                             <Blend />
