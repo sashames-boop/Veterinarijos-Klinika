@@ -112,7 +112,33 @@
 
         <Tab text="Incidents">
             <content>
-                <Label text="Incident management" />
+                <VBox alignment="CENTER" prefHeight="368.0" prefWidth="720.0" spacing="12">
+                    <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
+                        <children>
+                            <Button text="Add" onAction="#openIncidentAdd"/>
+                            <Button disable ="true" text="Edit"/>
+                            <Button disable="true" text="Delete"/>
+                        </children>
+                        <effect>
+                            <Blend />
+                        </effect>
+                        <VBox.margin>
+                            <Insets />
+                        </VBox.margin>
+                        <padding>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                    </HBox>
+                    <TableView fx:id="incidentsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="incidentIdColumn" text="ID" prefWidth="45"/>
+                            <TableColumn fx:id="incidentCommentColumn" text="Comment" prefWidth="245"/>
+                            <TableColumn fx:id="incidentStatusColumn" text="Status" prefWidth="100"/>
+                            <TableColumn fx:id="incidentCreatedColumn" text="Created" prefWidth="150"/>
+                            <TableColumn fx:id="incidentModifiedColumn" text="Modified" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+                </VBox>
             </content>
         </Tab>
     </tabs>
