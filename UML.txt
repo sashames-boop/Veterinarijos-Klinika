@@ -1,0 +1,108 @@
+@startuml
+class Admin {
+    -username: String
+    -pass: String
+}
+
+class User {
+    -id: Integer
+    -name: String
+    -username: String
+    -phone: String
+    -password: String
+    -blocked: Boolean
+    +isBlocked(): boolean
+    +setBlocked(blocked: boolean): void
+}
+
+class Client {
+    -email: String
+    +registerPet(pet: Pet): void
+    +bookAppointment(date: String, time: String, pet: Pet, vet: Vet): Registration
+}
+
+class Pet {
+    -id: Integer
+    -name: String
+    -type: PetType
+    -age: int
+    -weight: double
+    +getInfo(): String
+}
+
+class Vet {
+    -specialization: String
+    +acceptPatient(registration: Registration): void
+    +confirmRegistration(): void
+}
+
+class Groomer {
+    -specialization: String
+    +acceptPatient(registration: Registration): void
+    +confirmRegistration(): void
+}
+
+class Registration {
+    -id: Integer
+    -date: String
+    -time: String
+    -confirmed: boolean
+    -cancelled: Boolean
+    +confirm(): void
+    +cancel(): void
+    +setDate(date: String): void
+    +setTime(time: String): void
+}
+
+class Incident {
+    -id: int
+    -registrationDate: LocalDateTime
+    -modificationDate: LocalDateTime
+    -status: IncidentStatus
+    -comment: String
+}
+
+enum PetType {
+    DOG
+    CAT
+    RABBIT
+    FISH
+    MOUSE
+    BIRD
+    REPTILE
+    HAMSTER
+    GUINEA
+    OTHER
+}
+
+enum IncidentStatus {
+    CREATED
+    ACCEPTED
+    RESOLVED
+    CANCELLED
+}
+
+class Clinic {
+    -name: String
+    -address: String
+    -free_spots: int
+    +create_new_(): void
+    +redaguoti_pasl(): void //+ keisti kaina; kokiems gyvunams teikiama paslauga
+    +perziureti_ist(): void
+    +ar_klientas_atvyko(): bool
+    +atsakyti_i_kom(): String
+    +redaguoti_kom(): String
+    +priskirti_priziur(): void
+    +nustatyti_darbo_laika(): LocalTime
+}
+
+Klientas "1"--"1..*" Augintinis // KLientas gali tureti kelis augintinius; AUgintinis turi tik viena KLientas
+Augintinis "1"--"0..*" Klinika // Augintinis gali priklausyti nuo 0 iki daug kliniku; Klinika turi tik viena tam tikra Augintinis
+Veterinaras "1"--"0..*" Klinika //
+
+Client "0..1"--"0..*" Pet
+Client "0..1"--"0..*" Registration
+Pet "0..1"--"0..*" Registration
+Vet "0..1"--"0..*" Registration
+Groomer "0..1"--"0..*" Registration
+@enduml
