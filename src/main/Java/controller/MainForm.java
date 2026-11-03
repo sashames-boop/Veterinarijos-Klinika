@@ -1061,6 +1061,18 @@ public class MainForm {
         });
     }
 
+    //REDAGUOTI INCIDENTA
+    @FXML
+    public void openIncidentEdit(ActionEvent actionEvent) {
+
+    }
+
+    //ISTRINTI INCIDENTA
+    @FXML
+    public void openIncidentDelete(ActionEvent actionEvent) {
+
+    }
+
 
     //PAPILDOMOS FUNKCIJOS---------------------------------------------------------------------------------------------------------------------------------
     private <T> void dataValidation(Dialog<T> dialog, ButtonType submitButton,
