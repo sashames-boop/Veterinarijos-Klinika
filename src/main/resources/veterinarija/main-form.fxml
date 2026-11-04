@@ -5,7 +5,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane prefHeight="440" prefWidth="720" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainForm">
+<TabPane prefHeight="540" prefWidth="1020" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainForm">
     <tabs>
         <Tab text="Users">
             <content>
@@ -79,9 +79,9 @@
                 <VBox alignment="CENTER" prefHeight="368.0" prefWidth="720.0" spacing="12">
                     <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
                         <children>
-                            <Button onAction="#openRegistrationDelete" text="Delete" />
-                            <Button onAction="#openRegistrationEdit" text="Edit" />
-                            <Button onAction="#openRegistrationAdd" text="Add" />
+                            <Button onAction="#openRegistrationDelete" text="Delete registration" />
+                            <Button onAction="#openRegistrationEdit" text="Edit registration" />
+                            <Button onAction="#openRegistrationAdd" text="Add new registration" />
                         </children>
                         <effect>
                             <Blend />
@@ -115,9 +115,9 @@
                 <VBox alignment="CENTER" prefHeight="368.0" prefWidth="720.0" spacing="12">
                     <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
                         <children>
-                            <Button text="Add" onAction="#openIncidentAdd"/>
-                            <Button disable ="true" text="Edit" onAction="#openIncidentEdit"/>
-                            <Button disable="true" text="Delete" onAction="#openIncidentDelete"/>
+                            <Button onAction="#openIncidentDelete" text="Delete incident" />
+                            <Button onAction="#openIncidentEdit" text="Edit incident" />
+                            <Button onAction="#openIncidentAdd" text="Add new incident" />
                         </children>
                         <effect>
                             <Blend />
@@ -131,11 +131,11 @@
                     </HBox>
                     <TableView fx:id="incidentsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                         <columns>
-                            <TableColumn fx:id="incidentIdColumn" text="ID" prefWidth="45"/>
-                            <TableColumn fx:id="incidentCommentColumn" text="Comment" prefWidth="245"/>
-                            <TableColumn fx:id="incidentStatusColumn" text="Status" prefWidth="100"/>
-                            <TableColumn fx:id="incidentCreatedColumn" text="Created" prefWidth="150"/>
-                            <TableColumn fx:id="incidentModifiedColumn" text="Modified" prefWidth="150"/>
+                            <TableColumn fx:id="incidentIdColumn" prefWidth="45" text="ID" />
+                            <TableColumn fx:id="incidentCommentColumn" prefWidth="245" text="Comment" />
+                            <TableColumn fx:id="incidentStatusColumn" prefWidth="100" text="Status" />
+                            <TableColumn fx:id="incidentCreatedColumn" prefWidth="150" text="Created" />
+                            <TableColumn fx:id="incidentModifiedColumn" prefWidth="150" text="Modified" />
                         </columns>
                     </TableView>
                 </VBox>
