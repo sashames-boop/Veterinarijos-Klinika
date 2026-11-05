@@ -9,136 +9,25 @@
     <tabs>
         <Tab text="Users">
             <content>
-                <VBox alignment="CENTER" spacing="12">
-               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                  <children>
-                     <ToggleButton mnemonicParsing="false" onAction="#toggleUserBlocked" text="Block/Unblock" />
-                     <ChoiceBox fx:id="userTypeFilter" prefWidth="144.0" />
-                     <Button mnemonicParsing="false" onAction="#openUserDelete" text="Delete User" />
-                     <Button mnemonicParsing="false" onAction="#openUserEdit" text="Edit user" />
-                          <Button onAction="#openClientRegistration" text="Add client" />
-                          <Button onAction="#openVetRegistration" text="Add veterinarian" />
-                          <Button onAction="#openGroomerRegistration" text="Add groomer" />
-                  </children>
-                  <padding>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </padding>
-               </HBox>
-
-                    <TableView fx:id="usersTable" VBox.vgrow="ALWAYS">
-                        <columns>
-                            <TableColumn fx:id="userIdColumn" prefWidth="40.0" text="ID" />
-                            <TableColumn fx:id="userNameColumn" prefWidth="160.0" text="Name" />
-                            <TableColumn fx:id="usernameColumn" prefWidth="120.0" text="Username" />
-                            <TableColumn fx:id="userPhoneColumn" prefWidth="140" text="Phone" />
-                            <TableColumn fx:id="userRoleColumn" prefWidth="120" text="Role" />
-                            <TableColumn fx:id="userIsBlockedColumn" prefWidth="120" text="Status" />
-                        </columns>
-                    </TableView>
-                </VBox>
+                <fx:include fx:id="users" source="users-tab.fxml"/>
             </content>
         </Tab>
 
         <Tab text="Pets">
             <content>
-                <VBox alignment="CENTER" prefHeight="368.0" prefWidth="720.0" spacing="12">
-               <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
-                  <children>
-                      <Button onAction="#openPetDelete" text="Delete pet" />
-                      <Button onAction="#openPetEdit" text="Edit pet" />
-                      <Button onAction="#openPetRegistration" text="Add pet" />
-                      <Button onAction="#openAssigning" text="Assign owner" />
-                      <Button onAction="#openInformation" text="Pet information" />
-                  </children>
-                  <effect>
-                     <Blend />
-                  </effect>
-                  <VBox.margin>
-                     <Insets />
-                  </VBox.margin>
-                  <padding>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </padding>
-               </HBox>
-               <TableView fx:id="petsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                 <columns>
-                     <TableColumn fx:id="petIdColumn" prefWidth="60" text="ID" />
-                     <TableColumn fx:id="petNameColumn" prefWidth="150" text="Name" />
-                     <TableColumn fx:id="petTypeColumn" prefWidth="100" text="Type" />
-                     <TableColumn fx:id="petAgeColumn" prefWidth="70" text="Age" />
-                     <TableColumn fx:id="petWeightColumn" prefWidth="100" text="Weight (kg)" />
-                     <TableColumn fx:id="petOwnerColumn" prefWidth="180" text="Owner" />
-                 </columns>
-               </TableView>
-                </VBox>
+                <fx:include fx:id="pets" source="pets-tab.fxml"/>
             </content>
         </Tab>
 
         <Tab text="Registrations">
             <content>
-                <VBox alignment="CENTER" prefHeight="368.0" prefWidth="720.0" spacing="12">
-                    <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
-                        <children>
-                            <Button onAction="#openRegistrationDelete" text="Delete registration" />
-                            <Button onAction="#openRegistrationEdit" text="Edit registration" />
-                            <Button onAction="#openRegistrationAdd" text="Add new registration" />
-                        </children>
-                        <effect>
-                            <Blend />
-                        </effect>
-                        <VBox.margin>
-                            <Insets />
-                        </VBox.margin>
-                        <padding>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                        </padding>
-                    </HBox>
-                    <TableView fx:id="regTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                        <columns>
-                            <TableColumn fx:id="regIdColumn" prefWidth="40.0" text="ID" />
-                            <TableColumn fx:id="dateColumn" prefWidth="90.0" text="Date" />
-                            <TableColumn fx:id="timeColumn" prefWidth="90.0" text="Time" />
-                            <TableColumn fx:id="clientColumn" prefWidth="120.0" text="Client" />
-                            <TableColumn fx:id="petColumn" text="Pet's name" />
-                            <TableColumn fx:id="vetColumn" prefWidth="120.0" text="Vet" />
-                            <TableColumn fx:id="groomerColumn" prefWidth="120.0" text="Groomer" />
-                            <TableColumn fx:id="statusColumn" prefWidth="80" text="Status" />
-                        </columns>
-                    </TableView>
-                </VBox>
-
+                <fx:include fx:id="registrations" source="registrations-tab.fxml"/>
             </content>
         </Tab>
 
         <Tab text="Incidents">
             <content>
-                <VBox alignment="CENTER" prefHeight="368.0" prefWidth="720.0" spacing="12">
-                    <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
-                        <children>
-                            <Button onAction="#openIncidentDelete" text="Delete incident" />
-                            <Button onAction="#openIncidentEdit" text="Edit incident" />
-                            <Button onAction="#openIncidentAdd" text="Add new incident" />
-                        </children>
-                        <effect>
-                            <Blend />
-                        </effect>
-                        <VBox.margin>
-                            <Insets />
-                        </VBox.margin>
-                        <padding>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                        </padding>
-                    </HBox>
-                    <TableView fx:id="incidentsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                        <columns>
-                            <TableColumn fx:id="incidentIdColumn" prefWidth="45" text="ID" />
-                            <TableColumn fx:id="incidentCommentColumn" prefWidth="245" text="Comment" />
-                            <TableColumn fx:id="incidentStatusColumn" prefWidth="100" text="Status" />
-                            <TableColumn fx:id="incidentCreatedColumn" prefWidth="150" text="Created" />
-                            <TableColumn fx:id="incidentModifiedColumn" prefWidth="150" text="Modified" />
-                        </columns>
-                    </TableView>
-                </VBox>
+                <fx:include fx:id="incidents" source="incidents-tab.fxml"/>
             </content>
         </Tab>
     </tabs>

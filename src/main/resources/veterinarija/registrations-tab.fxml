@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrationsController" alignment="CENTER" prefHeight="368.0" prefWidth="720.0" spacing="12">
+
+    <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
+        <children>
+            <TextField fx:id="searchField"
+                       promptText="Search..." />
+            <Button onAction="#openRegistrationDelete" text="Delete registration" />
+            <Button onAction="#openRegistrationEdit" text="Edit registration" />
+            <Button onAction="#openRegistrationAdd" text="Add new registration" />
+        </children>
+        <effect>
+            <Blend />
+        </effect>
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+    </HBox>
+    <TableView fx:id="regTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="regIdColumn" prefWidth="40.0" text="ID" />
+            <TableColumn fx:id="dateColumn" prefWidth="90.0" text="Date" />
+            <TableColumn fx:id="timeColumn" prefWidth="90.0" text="Time" />
+            <TableColumn fx:id="clientColumn" prefWidth="120.0" text="Client" />
+            <TableColumn fx:id="petColumn" text="Pet's name" />
+            <TableColumn fx:id="vetColumn" prefWidth="120.0" text="Vet" />
+            <TableColumn fx:id="groomerColumn" prefWidth="120.0" text="Groomer" />
+            <TableColumn fx:id="statusColumn" prefWidth="80" text="Status" />
+        </columns>
+    </TableView>
+</VBox>

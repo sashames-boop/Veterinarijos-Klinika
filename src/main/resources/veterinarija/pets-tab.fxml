@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PetsController" alignment="CENTER" prefHeight="368.0" prefWidth="720.0" spacing="12">
+
+    <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
+        <children>
+            <TextField fx:id="searchField"
+                       promptText="Search..." />
+            <Button onAction="#openPetDelete" text="Delete pet" />
+            <Button onAction="#openPetEdit" text="Edit pet" />
+            <Button onAction="#openPetRegistration" text="Add pet" />
+            <Button onAction="#openAssigning" text="Assign owner" />
+            <Button onAction="#openInformation" text="Pet information" />
+        </children>
+        <effect>
+            <Blend />
+        </effect>
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+    </HBox>
+    <TableView fx:id="petsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="petIdColumn" prefWidth="60" text="ID" />
+            <TableColumn fx:id="petNameColumn" prefWidth="150" text="Name" />
+            <TableColumn fx:id="petTypeColumn" prefWidth="100" text="Type" />
+            <TableColumn fx:id="petAgeColumn" prefWidth="70" text="Age" />
+            <TableColumn fx:id="petWeightColumn" prefWidth="100" text="Weight (kg)" />
+            <TableColumn fx:id="petOwnerColumn" prefWidth="180" text="Owner" />
+        </columns>
+    </TableView>
+</VBox>
