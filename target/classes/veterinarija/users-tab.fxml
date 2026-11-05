@@ -6,11 +6,10 @@
 <?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UsersController" alignment="CENTER" spacing="12">
-
-    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+    <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
         <children>
             <TextField fx:id="searchField"
-                       promptText="Search..." />
+                       promptText="Search..." alignment="CENTER_LEFT" />
             <ToggleButton mnemonicParsing="false" onAction="#toggleUserBlocked" text="Block/Unblock" />
             <ChoiceBox fx:id="userTypeFilter" prefWidth="144.0" />
             <Button mnemonicParsing="false" onAction="#openUserDelete" text="Delete User" />
