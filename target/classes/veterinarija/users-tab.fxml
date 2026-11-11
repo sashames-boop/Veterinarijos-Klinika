@@ -9,7 +9,7 @@
     <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
         <children>
             <TextField fx:id="searchField"
-                       promptText="Search..." alignment="CENTER_LEFT" />
+                       promptText="Search..." />
             <ToggleButton mnemonicParsing="false" onAction="#toggleUserBlocked" text="Block/Unblock" />
             <ChoiceBox fx:id="userTypeFilter" prefWidth="144.0" />
             <Button mnemonicParsing="false" onAction="#openUserDelete" text="Delete User" />
